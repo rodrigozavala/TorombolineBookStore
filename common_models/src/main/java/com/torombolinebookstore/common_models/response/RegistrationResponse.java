@@ -1,4 +1,4 @@
-package com.torombolinebookstore.authentication.model.entities;
+package com.torombolinebookstore.common_models.response;
 
 
 import lombok.AllArgsConstructor;

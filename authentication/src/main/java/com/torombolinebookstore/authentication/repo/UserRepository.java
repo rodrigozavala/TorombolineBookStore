@@ -1,7 +1,7 @@
 package com.torombolinebookstore.authentication.repo;
 
 import com.torombolinebookstore.authentication.dao.UserDAO;
-import com.torombolinebookstore.authentication.model.User;
+import com.torombolinebookstore.common_models.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

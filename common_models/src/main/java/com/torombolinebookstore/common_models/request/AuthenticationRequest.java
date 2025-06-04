@@ -1,16 +1,13 @@
-package com.torombolinebookstore.authentication.model.entities;
-
+package com.torombolinebookstore.common_models.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class RegistrationRequest {
-
+@AllArgsConstructor
+public class AuthenticationRequest {
     private String email;
     private String password;
-
 }

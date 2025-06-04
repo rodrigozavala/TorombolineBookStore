@@ -50,6 +50,11 @@
 			<artifactId>common_utils</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.torombolinebookstore</groupId>
+			<artifactId>common_models</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<!--<dependency>
 			<groupId>com.vmware.tanzu.springcloudgateway.extensions</groupId>
 			<artifactId>access-control</artifactId>

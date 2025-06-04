@@ -1,11 +1,11 @@
 package com.torombolinebookstore.authentication.controller;
 
-import com.torombolinebookstore.authentication.model.*;
-import com.torombolinebookstore.authentication.model.entities.AuthenticationRequest;
-import com.torombolinebookstore.authentication.model.entities.AuthenticationResponse;
-import com.torombolinebookstore.authentication.model.entities.RegistrationRequest;
-import com.torombolinebookstore.authentication.model.entities.RegistrationResponse;
 import com.torombolinebookstore.authentication.service.CustomUserDetailsService;
+import com.torombolinebookstore.common_models.model.User;
+import com.torombolinebookstore.common_models.request.AuthenticationRequest;
+import com.torombolinebookstore.common_models.request.RegistrationRequest;
+import com.torombolinebookstore.common_models.response.AuthenticationResponse;
+import com.torombolinebookstore.common_models.response.RegistrationResponse;
 import com.torombolinebookstore.common_utils.utils.ByteOpsUtils;
 import com.torombolinebookstore.common_utils.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;

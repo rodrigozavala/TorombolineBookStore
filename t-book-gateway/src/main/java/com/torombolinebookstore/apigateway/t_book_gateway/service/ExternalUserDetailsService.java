@@ -1,6 +1,6 @@
-package com.torombolinebookstore.authentication.service;
+package com.torombolinebookstore.apigateway.t_book_gateway.service;
 
-import com.torombolinebookstore.authentication.repo.UserRepository;
+import com.torombolinebookstore.apigateway.t_book_gateway.client.AuthenticationClient;
 import com.torombolinebookstore.common_models.model.CustomUserDetails;
 import com.torombolinebookstore.common_models.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,10 @@ import java.util.Optional;
 
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class ExternalUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepository repository;
-
+    private AuthenticationClient authenticationClient;
 
     private PasswordEncoder encoder;
 
@@ -30,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = repository.findByEmail(username);// Assuming 'email' is used as username
+        Optional<User> user = authenticationClient.findByEmail(username);// Assuming 'email' is used as username
 
         // Converting UserInfo to UserDetails
         return user.map(t -> new CustomUserDetails(t))
@@ -40,7 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public String addUser(User userInfo) {
         // Encode password before saving the user
         userInfo.setPasswordHash(encoder.encode(userInfo.getPasswordHash()));
-        repository.save(userInfo);
+        authenticationClient.save(userInfo);
         return "User Added Successfully";
     }
 }

@@ -1,6 +1,6 @@
 package com.torombolinebookstore.authentication.dao;
 
-import com.torombolinebookstore.authentication.model.User;
+import com.torombolinebookstore.common_models.model.User;
 
 import java.sql.SQLException;
 import java.util.Collection;

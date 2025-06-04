@@ -1,4 +1,4 @@
-package com.torombolinebookstore.authentication.model;
+package com.torombolinebookstore.common_models.model;
 
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
