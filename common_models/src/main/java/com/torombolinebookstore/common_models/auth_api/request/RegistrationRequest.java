@@ -1,4 +1,4 @@
-package com.torombolinebookstore.common_models.request;
+package com.torombolinebookstore.common_models.auth_api.request;
 
 
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
-package com.torombolinebookstore.apigateway.t_book_gateway.filter;
+package com.torombolinebookstore.apigw.t_book_gw.filter;
 
 
-import com.torombolinebookstore.apigateway.t_book_gateway.service.ExternalUserDetailsService;
+import com.torombolinebookstore.apigw.t_book_gw.service.ExternalUserDetailsService;
 import com.torombolinebookstore.common_utils.utils.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -39,7 +39,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            if (JwtUtils.validateToken(token, userDetails)) {
+            if (JwtUtils.validateToken(token, username)) {
+
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,

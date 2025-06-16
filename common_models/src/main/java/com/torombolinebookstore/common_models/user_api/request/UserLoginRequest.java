@@ -1,13 +1,16 @@
-package com.torombolinebookstore.common_models.request;
+package com.torombolinebookstore.common_models.user_api.request;
+
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthenticationRequest {
-    private String email;
+@Builder
+public class UserLoginRequest {
+    private String userEmail;
     private String password;
 }

@@ -34,7 +34,11 @@ public class JwtUtils {
     }
 
     private static Key getSignKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET);
+        return getSignKey(SECRET);
+    }
+
+    private static Key getSignKey(String secret) {
+        byte[] keyBytes = Decoders.BASE64.decode(secret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
@@ -44,6 +48,8 @@ public class JwtUtils {
         //Then store it as a string
         String custom_secret = Encoders.BASE64.encode(secretKeyGenerated.getEncoded());
         System.out.println("Custom secret: " + custom_secret);
+
+
         // And then do this to generate the key again
         byte[] keyBytes = Decoders.BASE64.decode(custom_secret);
         Key second_key= Keys.hmacShaKeyFor(keyBytes);
@@ -80,5 +86,10 @@ public class JwtUtils {
     public static Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    public static Boolean validateToken(String token, String userName) {
+        final String userNameInToken = extractUsername(token);
+        return (userNameInToken.equals(userName) && !isTokenExpired(token));
     }
 }
