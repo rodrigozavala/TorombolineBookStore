@@ -7,6 +7,8 @@ import com.torombolinebookstore.common_models.auth_api.response.AuthenticationRe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Service
 public class LoginService {
@@ -20,8 +22,20 @@ public class LoginService {
             ResponseEntity<AuthenticationResponse> response = authenticationClient.authenticate(authenticationRequest);
             return response.getBody().getJwtToken();
         }catch (Exception e) {
-            System.out.println("there is an issue");
+            System.out.println("there is an issue with get_token");
         }
         return null;
+    }
+
+
+    public String test_authentication(){
+        String result = "Failed";
+        try{
+            ResponseEntity<String > response = authenticationClient.testAuth();
+            result = response.getBody();
+        }catch (Exception e){
+            System.out.println("there is an issue with test_authentication");
+        }
+        return result;
     }
 }

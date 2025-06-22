@@ -1,6 +1,7 @@
 package com.torombolinebookstore.apigw.t_book_gw.client;
 
 
+import com.torombolinebookstore.apigw.t_book_gw.config.FeignClientConfig;
 import com.torombolinebookstore.common_models.auth_api.request.AuthenticationRequest;
 import com.torombolinebookstore.common_models.auth_api.request.RegistrationRequest;
 import com.torombolinebookstore.common_models.auth_api.response.AuthenticationResponse;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(name = "authentication", url = "localhost:8090/auth")
+@FeignClient(name = "authentication", url = "localhost:8090/auth", configuration = FeignClientConfig.class)
 public interface AuthenticationClient {
 
     @GetMapping("/welcome")

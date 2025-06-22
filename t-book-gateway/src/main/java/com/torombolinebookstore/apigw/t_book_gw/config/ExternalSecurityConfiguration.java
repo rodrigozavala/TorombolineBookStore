@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
@@ -33,14 +34,20 @@ public class ExternalSecurityConfiguration {
                         .requestMatchers("/user/login").permitAll()
                         .requestMatchers("/user/register").permitAll()
                         // Role-based endpoints
-                        .requestMatchers("/user/test").hasRole("USER")
+                        .requestMatchers("/user/test").authenticated()//.hasRole("USER")
                         // All other endpoints require authentication
                         .anyRequest().authenticated()
                 )// Setting a stateless session
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                /* Will use oauth2ResourceServer to take JWTs to decode them using my
+                * jwtDecoder(jwtSecretKey()) (to get a HMAC512 decocer) and
+                * jwtAuthenticationConverter() (to get an authentication converter to get Roles ingrained
+                * into the JWT)
+                * */
                 .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwt-> jwt.decoder(jwtDecoder(jwtSecretKey()))
-                                .jwtAuthenticationConverter(jwtAuthenticationConverter()))
+                        .jwt(jwt-> {
+                             jwt.decoder(jwtDecoder(jwtSecretKey()))
+                                .jwtAuthenticationConverter(jwtAuthenticationConverter());})
                 )
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(new LoginRedirectAuthenticationEntryPoint("/login"))
@@ -57,6 +64,7 @@ public class ExternalSecurityConfiguration {
 
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
+        // Still not in use, I must find a way to add a ROLE in my JWTs to experiment with JWT authorization
         JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
         grantedAuthoritiesConverter.setAuthoritiesClaimName("roles");
         grantedAuthoritiesConverter.setAuthorityPrefix("ROLE_");
@@ -69,7 +77,7 @@ public class ExternalSecurityConfiguration {
 
     @Bean
     public JwtDecoder jwtDecoder(SecretKey jwtSecretKey) {
-        return NimbusJwtDecoder.withSecretKey(jwtSecretKey).build();
+        return NimbusJwtDecoder.withSecretKey(jwtSecretKey).macAlgorithm(MacAlgorithm.HS512).build();
     }
 
     @Bean

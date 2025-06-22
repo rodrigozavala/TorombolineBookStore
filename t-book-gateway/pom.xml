@@ -7,10 +7,10 @@
 		<artifactId>LibreriaTomborolona</artifactId>
 		<version>1</version>
 	</parent>
-	<groupId>com.torombolinebookstore.apigateway</groupId>
-	<artifactId>t-book-gateway</artifactId>
+	<groupId>com.torombolinebookstore.apigw</groupId>
+	<artifactId>t-book-gw</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>t-book-gateway</name>
+	<name>t-book-gw</name>
 	<description>A gateway for my service</description>
 	<url/>
 	<licenses>

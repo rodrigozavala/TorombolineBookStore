@@ -43,12 +43,11 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
     public ResponseEntity<AuthenticationResponse> testUser(@RequestBody AuthenticationRequest request) throws Exception{
-
+        String result = loginService.test_authentication();
         AuthenticationResponse response = new AuthenticationResponse();
-
-
+        System.out.println("The message of this test is: "+ String.valueOf(result));
         return  ResponseEntity.ok(response);
     }
 
